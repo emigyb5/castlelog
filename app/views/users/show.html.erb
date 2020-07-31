@@ -1,22 +1,57 @@
 <div>
   <div>
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title"><%= @user.name %></h3>
+    <div>
+      <div>
+        <h3><%= @user.name %></h3>
       </div>
-      <div class="card-body">
+      <div>
         <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 100 }) %>" alt="">
       </div>
     </div>
   </div>
+  <% if current_user == @user %>
+  <h3 class="text-center mt-3">Log castle now!</h3>
   <div>
-  <p> render form</p>
-  <p>signup now!</p>
+    <div class="col-sm-6 offset-sm-3">
+      <%= form_with(model: @log, local: true) do |f| %>
+        <div class="form-group">
+          <%= f.label :title, 'タイトル(必須)' %>
+          <%= f.text_area :title, class: 'form-control'%>
+        </div>
+        <div class="form-group">
+          <%= f.label :image, '画像（必須）' %>
+          <%= f.file_field :image, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :comment, 'コメント（必須）' %>
+          <%= f.text_area :comment, class: 'form-control', rows: 5 %>
+        </div>
+        <div class="form-group">
+          <%= f.label :tag, 'タグ' %>
+          <%= f.text_area :tag, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :url, '参考URL' %>
+          <%= f.text_area :url, class: 'form-control' %>
+        </div>
+        <%= f.submit 'Post', class: 'btn btn-primary btn-block mb-5' %>
+      <% end %>
+    </div>
   </div>
+  <% else %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <%= link_to 'Signupして投稿する', signup_path, class: 'btn btn-lg btn-primary' %>
+    </div>
+  </div>
+  <% end %>
   <div>
     <ul class="nav nav-tabs nav-justified mb-3">
-      <li class="nav-item"><a href="#" class="nav-link">My log</a></li>
+      <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">My logs <span class="badge badge-secondary"><%= @count_logs %></span></a></li>
       <li class="nav-item"><a href="#" class="nav-link">Favorite</a></li>
     </ul>
   </div>
+  
+  <%= render 'logs/logs', logs: @logs %>
+
 </div>

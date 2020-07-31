@@ -1,0 +1,6 @@
+
+<img class='mb-3' src="<%= @log.image.url %>" alt="<%= @log.title %>">
+<h1><%= @log.title %></h1>
+<p><%= link_to @log.user.name, user_path(@log.user) %></p>
+<p><span>#</span><%= @log.tag %></p>
+<div><%= @log.comment %></div>
