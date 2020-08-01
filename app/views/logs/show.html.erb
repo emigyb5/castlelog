@@ -3,4 +3,10 @@
 <h1><%= @log.title %></h1>
 <p><%= link_to @log.user.name, user_path(@log.user) %></p>
 <p><span>#</span><%= @log.tag %></p>
-<div><%= @log.comment %></div>
+<div><%=safe_join(@log.comment.split("\n"),tag(:br))%></div>
+
+<%= render 'favorites/favorite_button', log: @log %>
+<!--澤亀追加行-↓->
+<%=safe_join(@log.comment.split("\n"),tag(:br))%>
+
+ 

@@ -7,4 +7,20 @@ class User < ApplicationRecord
     has_secure_password
     
     has_many :logs
+    has_many :favorites
+    has_many :favorite_logs, through: :favorites, source: :log
+    
+    def favorite(log)
+     self.favorites.find_or_create_by(log_id: log.id)
+    end
+  
+    def unfavorite(log)
+     favorite = self.favorites.find_by(log_id: log.id)
+     favorite.destroy if favorite
+    end
+  
+    def favorite?(log)
+     self.favorite_logs.include?(log)
+    end
+    
 end
