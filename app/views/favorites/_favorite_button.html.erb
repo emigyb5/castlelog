@@ -1,11 +1,12 @@
-<% if current_user.favorite?(@log) %>
-  <%= form_with(model: current_user.favorites.find_by(log_id: @log.id), local: true, method: :delete) do |f| %>
-    <%= hidden_field_tag :log_id, @log.id %>
+
+<% if current_user.favorite?(log) %>
+  <%= form_with(model: current_user.favorites.find_by(log_id: log.id), local: true, method: :delete) do |f| %>
+    <%= hidden_field_tag :log_id, log.id %>
     <%= f.submit 'Unfavorite', class: 'btn btn-secondary rounded-pill btn-lg mt-2' %>
   <% end %>
 <% else %>
   <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
-    <%= hidden_field_tag :log_id, @log.id %>
+    <%= hidden_field_tag :log_id, log.id %>
     <%= f.submit 'Favorite', class: 'btn btn-primary rounded-pill btn-lg mt-2' %>
   <% end %>
 <% end %>

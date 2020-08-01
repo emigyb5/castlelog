@@ -9,9 +9,10 @@
   <div>
     <div>
       <%= form_with(model: @log, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
         <div class="form-group">
           <%= f.label :title, 'タイトル'%>
-          <%= f.text_area :title, class: 'form-control'%>
+          <%= f.text_field :title, class: 'form-control'%>
         </div>
         <div class="form-group">
           <%= f.label :image, '画像' %>
@@ -23,11 +24,11 @@
         </div>
         <div class="form-group">
           <%= f.label :tag, 'タグ' %><span class="text-muted">(任意)</span>
-          <%= f.text_area :tag, class: 'form-control' %>
+          <%= f.text_field :tag, class: 'form-control' %>
         </div>
         <div class="form-group">
           <%= f.label :url, '参考URL' %><span class="text-muted">(任意)</span>
-          <%= f.text_area :url, class: 'form-control' %>
+          <%= f.text_field :url, class: 'form-control' %>
         </div>
         <%= f.submit 'Post', class: 'btn btn-primary btn-block mb-5' %>
       <% end %>
