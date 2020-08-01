@@ -1,11 +1,29 @@
+<div class="container">
+    <div class="jumbotron">
+　      <img class='mb-3 img-fluid rounded' src="<%= @log.image.url %>" alt="<%= @log.title %>">
+    </div>
+    <div class="mb-1">
+        <h3><%= @log.title %></h3>
+    </div>
+    <hr class="mb-1">
+     <div class="float-right"><%= render 'favorites/favorite_button', log: @log %></div>
+    <small><span>#</span><%= @log.tag %></small>
+    <div class="mt-3">
+        <a href="<%= user_path(@log.user)%>"><img class="rounded-circle img-fluid mb-3" src="<%= gravatar_url(@log.user, { size: 50 }) %>" alt="<%= @log.user.name %>"></a>
+        <%= link_to @log.user.name, user_path(@log.user) %>
+    </div>
+    
+    <div><%=safe_join(@log.comment.split("\n"),tag(:br))%></div>
+    <small>参考：<a href="<%= @log.url %>" target="_blank"><%= @log.url %></a><i class="fas fa-external-link-alt"></i></small>
+</div>
+<hr class="mt-5 mb-1">
+<h3 class="mt-3 mb-3 text-center"><i class="fab fa-fort-awesome"></i>Other Logs</h3>
+<%= render 'logs/logs', logs: @logs %>
 
-<img class='mb-3' src="<%= @log.image.url %>" alt="<%= @log.title %>">
-<h1><%= @log.title %></h1>
-<p><%= link_to @log.user.name, user_path(@log.user) %></p>
-<p><span>#</span><%= @log.tag %></p>
-<div><%=safe_join(@log.comment.split("\n"),tag(:br))%></div>
 
-<%= render 'favorites/favorite_button', log: @log %>
+
+
+
 <!--澤亀追加行-↓->
 <%=safe_join(@log.comment.split("\n"),tag(:br))%>
 
