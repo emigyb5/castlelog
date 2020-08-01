@@ -32,7 +32,7 @@ class LogsController < ApplicationController
   end
   
   def correct_user
-    @log = current_user.microposts.find_by(id: params[:id])
+    @log = current_user.logs.find_by(id: params[:id])
     unless @log
       redirect_to root_path
     end
