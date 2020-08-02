@@ -8,14 +8,19 @@ class LogsController < ApplicationController
     @logs = Log.order(id: :desc).page(params[:page])
   end
 
+  def new
+    @log = Log.new
+  end
+
   def create
+    @user = current_user
     @log = current_user.logs.build(logs_params)
     if @log.save
       flash[:success] = 'Logを投稿しました。'
-      redirect_back(fallback_location: "/")
+      redirect_to @user
     else
       flash.now[:danger] = 'Logの投稿に失敗しました。'
-      redirect_back(fallback_location: "/")
+      render :new
     end
   end
 
