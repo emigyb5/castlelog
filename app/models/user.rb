@@ -7,7 +7,7 @@ class User < ApplicationRecord
     has_secure_password
     
     has_many :logs
-    has_many :favorites
+    has_many :favorites, dependent: :destroy
     has_many :favorite_logs, through: :favorites, source: :log
     
     def favorite(log)
