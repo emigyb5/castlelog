@@ -24,6 +24,13 @@ class UsersController < ApplicationController
     end
   end
   
+  def destroy
+    @user = current_user
+    @user.destroy
+    flash[:success] = '退会しました。'
+    redirect_to root_path
+  end
+  
   def likes
     @user = User.find(params[:id])
     @logs = @user.favorite_logs.page(params[:page])

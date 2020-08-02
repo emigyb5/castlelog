@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   
-  resources :users, only: [:show, :new, :create] do
+  resources :users, only: [:show, :new, :create, :destroy] do
     member do
       get:likes
     end
