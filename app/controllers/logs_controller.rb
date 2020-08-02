@@ -27,7 +27,7 @@ class LogsController < ApplicationController
   def destroy
     @log.destroy
     flash[:success] = 'Logを削除しました。'
-    redirect_back(fallback_location: "/")
+    redirect_to root_path
   end
   
   private
